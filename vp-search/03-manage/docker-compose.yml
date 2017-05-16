@@ -1,0 +1,21 @@
+vp-search-manage:
+  image: vpclub/java
+  working_dir: /app
+  net: host
+  volumes:
+    - ./app:/app
+
+  command: java -Xmx128m -Xss256k -jar /app/vp-search-manage-1.0.0.jar --spring.profiles.active=test-lnyp
+
+  ports:
+    - 9896:9896
+
+#  environment:
+#    HOSTNAME: vpclub
+#
+#  extra_hosts:
+#    vpclub:
+#  log_driver: syslog
+#  log_opt:
+#      syslog-address: "tcp://172.16.45.3:5000"
+

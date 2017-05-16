@@ -1,0 +1,22 @@
+vp-search-provider:
+  image: vpclub/java
+  working_dir: /app
+  net: host
+  volumes:
+    - ./app:/app
+
+  command: java -Xmx1024m -Xss256k -jar /app/vp-search-provider-1.0.0.jar --spring.profiles.active=test-lnyp
+
+  ports:
+    - 9898:9898
+    - 23002:23002
+
+#  environment:
+#    HOSTNAME: vpclub
+#
+#  extra_hosts:
+#    vpclub:
+#  log_driver: syslog
+#  log_opt:
+#      syslog-address: "tcp://172.16.45.3:5000"
+
