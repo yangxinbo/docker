@@ -1,0 +1,11 @@
+zookeeper:
+  image: vpclub/zookeeper 
+  container_name: zookeeper
+  net: host 
+#  ports:
+#    - 2181:2181
+  environment:
+   - SERVER_ID=2
+   - ADDITIONAL_ZOOKEEPER_1=server.1=172.16.7.236:2888:3888
+   - ADDITIONAL_ZOOKEEPER_2=server.2=172.16.7.237:2889:3889
+   - ADDITIONAL_ZOOKEEPER_3=clientPort=2181

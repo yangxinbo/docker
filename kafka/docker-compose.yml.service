@@ -1,0 +1,55 @@
+version: '2'
+services:
+#zookeeper-cluster
+  zk1:
+    image: chw717/zookeeper 
+    container_name: zk1
+    volumes:
+     - ./zk1/logs/:/opt/zookeeper/logs
+     - ./zk1/bin/:/opt/zookeeper/bin
+    environment:
+     - SERVER_ID=1
+     - ADDITIONAL_ZOOKEEPER_1=server.1=localhost:2888:3888
+     - ADDITIONAL_ZOOKEEPER_2=server.2=localhost:2889:3889
+     - ADDITIONAL_ZOOKEEPER_3=server.3=localhost:2890:3890
+     - ADDITIONAL_ZOOKEEPER_4=clientPort=2181
+  zk2:
+    image: chw717/zookeeper
+    container_name: zk2
+    volumes:
+     - ./zk2/logs/:/opt/zookeeper/logs
+     - ./zk2/bin/:/opt/zookeeper/bin
+    environment:
+     - SERVER_ID=2
+     - ADDITIONAL_ZOOKEEPER_1=server.1=localhost:2888:3888
+     - ADDITIONAL_ZOOKEEPER_2=server.2=localhost:2889:3889
+     - ADDITIONAL_ZOOKEEPER_3=server.3=localhost:2890:3890
+     - ADDITIONAL_ZOOKEEPER_4=clientPort=2182
+  zk3:
+    image: chw717/zookeeper
+    container_name: zk3
+    volumes:
+     - ./zk3/logs/:/opt/zookeeper/logs
+     - ./zk3/bin/:/opt/zookeeper/bin
+    environment:
+     - SERVER_ID=3
+     - ADDITIONAL_ZOOKEEPER_1=server.1=localhost:2888:3888
+     - ADDITIONAL_ZOOKEEPER_2=server.2=localhost:2889:3889
+     - ADDITIONAL_ZOOKEEPER_3=server.3=localhost:2890:3890
+     - ADDITIONAL_ZOOKEEPER_4=clientPort=2183
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092"
+    links: 
+      - zk1
+      - zk2
+      - zk3
+    environment:
+    #   HOST_IP: 172.16.5.23
+    #   ZK: "zk1:2181,zk2:2182,zk3:2183"
+      KAFKA_ADVERTISED_HOST_NAME: 172.17.0.1
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: 172.16.5.23:2181,172.16.5.23:2182,172.16.5.23:2183
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

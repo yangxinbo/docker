@@ -1,0 +1,39 @@
+es1:
+  image: elasticsearch:1.7.5
+  net: host
+  container_name: es1 
+  ports:
+   - 9200:9200
+   - 9300:9300
+  volumes:
+   - ./node1/data:/usr/share/elasticsearch/data
+   - ./node1/config:/usr/share/elasticsearch/config
+
+  command: /usr/share/elasticsearch/bin/elasticsearch  -Des.cluster.name=vpclub-search-server -Des.node.master=true -Des.node.name=node1
+
+es2:
+  image: elasticsearch:1.7.5
+  net: host
+  container_name: es2 
+  ports:
+   - 9201:9200
+   - 9301:9300
+  volumes:
+   - ./node2/data:/usr/share/elasticsearch/data
+   - ./node2/config:/usr/share/elasticsearch/config
+  
+  command: /usr/share/elasticsearch/bin/elasticsearch  -Des.cluster.name=vpclub-search-server -Des.node.master=true -Des.node.name=node2
+
+es3:
+  image: elasticsearch:1.7.5
+  net: host
+  container_name: es3
+  ports:
+   - 9202:9200
+   - 9302:9300
+  volumes:
+   - ./node3/data:/usr/share/elasticsearch/data
+   - ./node3/config:/usr/share/elasticsearch/config
+
+  command: /usr/share/elasticsearch/bin/elasticsearch  -Des.cluster.name=vpclub-search-server -Des.node.master=true -Des.node.name=node3
+

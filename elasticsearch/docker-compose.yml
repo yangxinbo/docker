@@ -1,0 +1,18 @@
+elasticsearch:
+  image: elasticsearch:2.4.1
+  net: host
+  container_name: elasticsearch-node2
+  ports:
+   - 9200:9200
+   - 9300:9300
+  volumes:
+   - ./data:/usr/share/elasticsearch/data
+   - ./config:/usr/share/elasticsearch/config
+   - ./plugins:/usr/share/elasticsearch/plugins
+# environment:
+#    HOSTNAME: vpclub
+
+#  extra_hosts:
+#    vpclub: 172.16.45.4
+  command: /usr/share/elasticsearch/bin/elasticsearch -Des.insecure.allow.root=true -Des.cluster.name=vpclub-search-server -Des.node.master=true -Des.node.name=node2
+ 
