@@ -1,0 +1,10 @@
+otter-node:
+  image: plain/otter_node
+  container_name: dev-otter-node
+  privileged: true
+  net: host
+  environment:
+   NID: 1
+   MANAGER: 172.16.5.90:1099
+  volumes:
+    - ./log:/node/logs

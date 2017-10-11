@@ -1,0 +1,17 @@
+maxwell:
+  image: zendesk/maxwell
+  container_name: dev-es-maxwell
+  privileged: true
+#  net: host
+#  restart: always
+  environment:
+    MYSQL_PASSWORD: "@vpclubdev"
+    MYSQL_USERNAME: "maxwell"
+    MYSQL_HOST: 172.16.5.90
+    KAFKA_HOST: 172.16.5.90
+    KAFKA_PORT: 9092
+#    - 3306:3306
+    MAXWELL_OPTIONS: "--kafka_topic=es_%{database}_%{table}  
+                      --include_dbs moses_product,moses_order,moses_shop_admin,mcs_order,moses_security_admin,moses_share,moses_app_admin
+                      --include_tables product,product_org,product_user_type,sku,sub_order,shop,business_order,org,browse,share,app_option"
+#  command: bin/maxwell --user=$MYSQL_USERNAME --password=$MYSQL_PASSWORD --host=$MYSQL_HOST --producer=kafka --kafka.bootstrap.servers=$KAFKA_HOST:$KAFKA_PORT
