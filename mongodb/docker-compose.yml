@@ -1,0 +1,11 @@
+mongodb: 
+image: registry.cn-hangzhou.aliyuncs.com/wangbs/mongodb:latest
+container_name: mongodb 
+ports: 
+- 27017:27017 
+- 28017:28017 
+environment: 
+#MONGODB_PASS: "@vpclubdev" 
+AUTH: 'Off' 
+volumes: 
+- /data/mongodb:/data 

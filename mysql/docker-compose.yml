@@ -1,0 +1,14 @@
+mysql:
+  image: openshift/vpclub-mysql:5.7
+  container_name: dev-mysql
+  privileged: true
+#  net: host
+  restart: always
+  ports:
+    - 3306:3306
+  environment:
+    MYSQL_ROOT_PASSWORD: "@vpclubdev"
+  volumes:
+    - ./mysqlConf:/etc/mysql/conf.d
+    - ./data/mysql:/var/lib/mysql
+

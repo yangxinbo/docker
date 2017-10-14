@@ -1,0 +1,33 @@
+version: '2'
+services:
+  kafka1:
+    image: wurstmeister/kafka
+    ports:
+      - 9192:9192
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_PORT: 9192
+      KAFKA_HOST_IP: 172.16.45.3
+      KAFKA_ADVERTISED_HOST_NAME: 172.16.45.3
+      KAFKA_ADVERTISED_PORT: "9192"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9192
+      KAFKA_LISTENERS: PLAINTEXT://:9192
+      KAFKA_ZOOKEEPER_CONNECT: 172.16.45.3:2181,172.16.45.3:2182,172.16.45.3:2183
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      #KAFKA_MESSAGE_MAX_BYTE: 5242880
+  kafka2:
+    image: wurstmeister/kafka
+    ports:
+      - 9193:9193
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_PORT: 9193
+      KAFKA_HOST_IP: 172.16.45.3
+      KAFKA_ADVERTISED_HOST_NAME: 172.16.45.3
+      KAFKA_ADVERTISED_PORT: "9193"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9193
+      KAFKA_LISTENERS: PLAINTEXT://:9193
+      KAFKA_ZOOKEEPER_CONNECT: 172.16.45.3:2181,172.16.45.3:2182,172.16.45.3:2183
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
