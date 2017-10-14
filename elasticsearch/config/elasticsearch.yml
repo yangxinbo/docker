@@ -325,12 +325,12 @@
 #
 #discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]
 cluster.name: vpclub-search-server
-node.name: node2
+node.name: node1
 http.port: 9200
 transport.tcp.port: 9300
-discovery.zen.ping.unicast.hosts: ["172.16.7.236:9300"]
+discovery.zen.ping.unicast.hosts: ["172.16.7.13:9301"]
 discovery.zen.ping.multicast.enabled: true
-network.host: 172.16.7.237
+network.host: 172.16.7.13
 index:
   analysis:
     analyzer:
